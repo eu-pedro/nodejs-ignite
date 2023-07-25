@@ -7,11 +7,19 @@ const server = http.createServer((req, res) => {
 
   if(method === 'GET' && url === '/tasks') {
     return res
-            .end('Listagem de task') 
+            .end(JSON.stringify(tasks)) 
             
   }
 
   if(method === 'POST' && url === '/tasks') {
+    tasks.push({
+      id: 1,
+      title: 'Título da tarefa',
+      description: 'exemplo de descrição',
+      completed_at: null,
+      created_at: new Date(),
+      updated_at: new Date(),
+    })
     return res.end('criação de task')
   }
 
