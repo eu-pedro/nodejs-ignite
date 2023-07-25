@@ -20,10 +20,10 @@ const server = http.createServer((req, res) => {
       created_at: new Date(),
       updated_at: new Date(),
     })
-    return res.end('criação de task')
+    return res.writeHead(201).end('criação de task')
   }
 
-  return res.end('Olá mundo')
+  return res.writeHead(404).end('Essa rota não existe!')
 })
 
 server.listen(3000)
