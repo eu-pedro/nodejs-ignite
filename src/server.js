@@ -7,8 +7,8 @@ const server = http.createServer((req, res) => {
 
   if(method === 'GET' && url === '/tasks') {
     return res
+            .setHeader('Content-Type', 'application/json')
             .end(JSON.stringify(tasks)) 
-            
   }
 
   if(method === 'POST' && url === '/tasks') {
