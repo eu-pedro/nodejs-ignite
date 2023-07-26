@@ -1,34 +1,21 @@
 import http from 'node:http';
 import { Json } from './middlewares/json.js';
-import { Database } from './database.js';
-import { randomUUID } from 'node:crypto';
-
-const database = new Database();
+import { routes } from './route.js';
 
 const server = http.createServer(async (req, res) => {
   const { method, url } = req
 
   await Json(req, res)
 
-  if(method === 'GET' && url === '/tasks') {
-    const tasks = database.select('tasks')
-    return res.end(JSON.stringify(tasks)) 
+  const route = routes.find((route) => {
+    return route.method === method && route.path === url
+  })
+
+  if(route) {
+    return route.handler(req, res)
   }
 
-  if(method === 'POST' && url === '/tasks') {
-    const { title, description } = req.body
-
-    database.insert('tasks', {
-      id: randomUUID(),
-      title,
-      description,
-      completed_at: null,
-      created_at: new Date(),
-      updated_at: new Date(),
-    })
-    
-    return res.writeHead(201).end('criação de task')
-  }
+  console.log(route)
 
   return res.writeHead(404).end('Essa rota não existe!')
 })
