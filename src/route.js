@@ -29,5 +29,12 @@ export const routes = [
 
       return res.writeHead(201).end('criação de task')
     }
+  },
+  {
+    method: 'DELETE',
+    path: '/tasks/:id',
+    handler: () => {
+
+    }
   }
 ]
