@@ -1,6 +1,7 @@
 import http from 'node:http';
 import { Json } from './middlewares/json.js';
 import { Database } from './database.js';
+import { randomUUID } from 'node:crypto';
 
 const database = new Database();
 
@@ -18,7 +19,7 @@ const server = http.createServer(async (req, res) => {
     const { title, description } = req.body
 
     database.insert('tasks', {
-      id: 1,
+      id: randomUUID(),
       title,
       description,
       completed_at: null,
