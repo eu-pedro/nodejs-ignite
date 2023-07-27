@@ -40,5 +40,16 @@ export const routes = [
 
       return res.end('task deletada')
     }
+  },
+  {
+    method: 'PUT', 
+    path: buildRoutePath('/tasks/:id'),
+    handler: (req, res) => {
+      const { title, description } = req.body
+      const { id } = req.params
+
+      database.update('tasks', id, { title, description})
+      return res.end('atualizado com sucesso')
+    }
   }
 ]
