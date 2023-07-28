@@ -73,10 +73,43 @@ export const routes = [
           updated_at: new Date(),
         })
 
+      return res.writeHead(204).end(JSON.stringify({
+        message: 'task successfully updated'
+      }))
+    }
+  },
+  {
+    method: 'PATCH',
+    path: buildRoutePath('/tasks/:id/completed'),
+    handler: (req, res) => {
+      const { id } = req.params
+
+      const task = database.select('tasks').find(row => row.id === id)
+
+      if (task.completed_at === null) {
+        database.complete('tasks', id, {
+          title: task.title,
+          description: task.description,
+          completed_at: new Date(),
+          created_at: task.created_at,
+          updated_at: new Date()
+        })
+
+        return res.writeHead(204).end()
+      }
+
+      database.complete('tasks', id, {
+        title: task.title,
+        description: task.description,
+        completed_at: null,
+        created_at: task.created_at,
+        updated_at: new Date()
+      })
+
 
 
       return res.writeHead(204).end(JSON.stringify({
-        message: 'task successfully updated'
+        message: 'task successfully completed'
       }))
     }
   }
