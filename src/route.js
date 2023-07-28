@@ -56,16 +56,20 @@ export const routes = [
       const { title, description } = req.body
       const { id } = req.params
 
-      if(!title ||!description){
+      if (!title || !description) {
         return res.writeHead(404).end(JSON.stringify({
           message: 'title and description are required'
         }))
       }
 
+      const task = database.select('tasks').find(row => row.id === id)
+
       database.update('tasks', id,
         {
           title,
           description,
+          completed_at: task.completed_at,
+          created_at: task.created_at,
           updated_at: new Date(),
         })
 
