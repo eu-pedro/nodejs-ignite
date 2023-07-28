@@ -26,4 +26,6 @@ const server = http.createServer(async (req, res) => {
   return res.writeHead(404).end('Essa rota não existe!')
 })
 
-server.listen(3000)
+server.listen(3000, () => {
+  return console.log('server is running...🚀')
+})
