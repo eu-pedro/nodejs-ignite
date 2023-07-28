@@ -23,5 +23,5 @@ Desafio 01 do módulo de introdução ao nodejs da trilha do Ignite da Rocketsea
 ---
 
 <p align="center">
-  Pedro Henrique 
+  Pedro Henrique 🚀
 </p>
