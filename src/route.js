@@ -48,7 +48,21 @@ export const routes = [
       const { title, description } = req.body
       const { id } = req.params
 
-      database.update('tasks', id, { title, description})
+      const tasks = database.select('tasks')
+
+      const uniqueTasks = tasks.find(task => task.id === id)
+
+      const { created_at, completed_at } = uniqueTasks
+
+
+      database.update('tasks', id,
+       { 
+        title, 
+        description,
+        completed_at,
+        created_at,
+        updated_at: new Date(),
+      })
       return res.end('atualizado com sucesso')
     }
   }
