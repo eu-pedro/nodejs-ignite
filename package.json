@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "csv": "^6.3.1",
+    "csv-generate": "^4.2.6",
     "csv-parse": "^5.4.0"
   }
 }
